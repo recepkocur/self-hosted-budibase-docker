@@ -96,6 +96,12 @@ services:
       - worker-service
       - app-service
       - couchdb-service
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.budi-proxy.rule=Host(`${CUSTOM_DOMAIN}`)
+      - traefik.http.routers.budi-proxy.tls=true
+      - traefik.http.routers.budi-proxy.tls.certresolver=letsencrypt
+      - traefik.http.services.budi-proxy.loadbalancer.server.port=10000
     networks:
       - proxy
 
