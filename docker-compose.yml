@@ -27,6 +27,14 @@ services:
       - redis-service
     volumes:
       - ./volumes/plugins:/plugins
+    networks:
+      - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.kong.rule=Host(`${CUSTOM_DOMAIN}`)
+      - traefik.http.routers.kong.tls=true
+      - traefik.http.routers.kong.tls.certresolver=letsencrypt
+      - traefik.http.services.kong.loadbalancer.server.port=10000
 
   worker-service:
     restart: unless-stopped

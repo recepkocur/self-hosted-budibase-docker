@@ -3,7 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - "reset.sh"
       - "makefile"
@@ -29,7 +29,7 @@ jobs:
       - name: Deploy to Dev VPS
         run: |
           ssh -i ~/.ssh/github-actions -p ${{ secrets.SSH_PORT }} -v ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
-            cd /home/recep/application/self-hosted-appsmith-docker
+            cd ${{ secrets.SSH_PATH }}
             git pull origin dev
             docker compose -f docker-compose.yml down
             docker compose -f docker-compose.yml build --no-cache
