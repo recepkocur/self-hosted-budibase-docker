@@ -1,7 +1,7 @@
 # Last Update: 2025.02.17
 
 # Proje Adı
-project_name = bbapps
+project_name = budi-
 
 # Yeniden Başlat
 restart:
@@ -30,7 +30,7 @@ log:
 
 # Container Listesi
 ps:
-	docker ps --format "\nNames: {{.Names}} \nID: {{.ID}} \nSize: {{.Size}} \nStatus: {{.Status}} \nPorts: {{.Ports}} "
+	watch -n 2 'docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Size}}\t{{.Ports}}" | grep budi-'
 
 # Düzeltme
 fix:
